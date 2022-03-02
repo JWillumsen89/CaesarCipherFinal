@@ -6,15 +6,12 @@ public class Main {
   void userInterfaceStart() {
 
     System.out.println("1) \tCaesar");
-    System.out.println("2) \tVigenére");
     System.out.println("0) \tExit");
 
     int inputNumberStart = userInputDecision();
     switch (inputNumberStart) {
       case 1:
         caesarMenu();
-      case 2:
-        //vigenere();
       default:
         System.exit(0);
     }
@@ -50,6 +47,8 @@ public class Main {
     String text = in.nextLine();
     text = text.toUpperCase();
     System.out.print("You entered: " + text);
+    System.out.print("\nEnter shift value (0-29): ");
+    shiftValue();
 
     return text;
   }
@@ -64,10 +63,11 @@ public class Main {
   }
 
   int shiftValue() {
-    Scanner in = new Scanner(System.in);
+    /*Scanner in = new Scanner(System.in);
     System.out.print("\nEnter shift value (0-29): ");
     int shift = in.nextInt();
-    System.out.println("You picked shift value: " + shift);
+    System.out.println("You picked shift value: " + shift);*/
+    int shift = 3;
     return shift;
   }
 
@@ -77,21 +77,12 @@ public class Main {
     System.out.println();
     whatNowMenu1();
   }
-
-  void vigenere() {
-
-  }
-
+//Still miss to be corrected
   void caesarDecryptMenu() {
     System.out.println("Caesar Decrypting");
-    String inputDecryptTextCaesar = enterDecryptText();
-    int shiftValueCaesar = shiftValue();
-    //TODO decrypting method
-    System.out.println("Encrypted text is: " + inputDecryptTextCaesar);
+    caesarDecrypt();
     System.out.println();
     whatNowMenu2();
-
-
   }
 
   void whatNowMenu1() {
@@ -133,7 +124,15 @@ public class Main {
     int[] encryptedNumbers = encryptMethod(text);
     String decryptedText = decryptedMethod(encryptedNumbers);
     int shiftValueCaesar = shiftValue();
-    System.out.println("Decrypted text: " + decryptedText);
+    System.out.println("\nDecrypted text: " + decryptedText);
+  }
+//still miss something
+  void caesarDecrypt() {
+    String decryptText = enterDecryptText();
+    int[] encryptedNumbers = encryptMethod(decryptText);
+    String decryptedText = encryptedMethod(encryptedNumbers);
+    int shiftValueCaesar = shiftValue();
+    System.out.println("\nEncrypted text: " + decryptedText);
   }
 
   public int[] encryptMethod(String text) {
@@ -148,9 +147,20 @@ public class Main {
 
   public String decryptedMethod(int[] numbers) {
     String text ="";
+    char arrayNumbers;
+    for (int i = 0; i < numbers.length; i++) {
+      arrayNumbers = numberToLetter(numbers[i] + shiftValue());
+      text += arrayNumbers;
+    }
+    return text;
+  }
+
+  //Still miss something
+  public String encryptedMethod(int[] numbers) {
+    String text ="";
     char c;
     for (int i = 0; i < numbers.length; i++) {
-      c = numberToLetter(numbers[i]);
+      c = numberToLetter(numbers[i] - shiftValue());
       text += c;
     }
     return text;
