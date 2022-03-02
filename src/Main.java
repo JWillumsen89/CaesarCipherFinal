@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Main {
 
-
   void userInterfaceStart() {
 
     System.out.println("1) \tCaesar");
@@ -61,7 +60,7 @@ public class Main {
     System.out.print("You entered: " + decryptText);
     return decryptText;
   }
-
+//Shift value hardcoded! and modulus not made to circle alphabet, so last letters in alphabet cant be used.
   int shiftValue() {
     /*Scanner in = new Scanner(System.in);
     System.out.print("\nEnter shift value (0-29): ");
@@ -77,7 +76,7 @@ public class Main {
     System.out.println();
     whatNowMenu1();
   }
-//Still miss to be corrected
+
   void caesarDecryptMenu() {
     System.out.println("Caesar Decrypting");
     caesarDecrypt();
@@ -126,7 +125,7 @@ public class Main {
     int shiftValueCaesar = shiftValue();
     System.out.println("\nDecrypted text: " + decryptedText);
   }
-//still miss something
+
   void caesarDecrypt() {
     String decryptText = enterDecryptText();
     int[] encryptedNumbers = encryptMethod(decryptText);
@@ -146,7 +145,7 @@ public class Main {
   }
 
   public String decryptedMethod(int[] numbers) {
-    String text ="";
+    String text = "";
     char arrayNumbers;
     for (int i = 0; i < numbers.length; i++) {
       arrayNumbers = numberToLetter(numbers[i] + shiftValue());
@@ -155,9 +154,8 @@ public class Main {
     return text;
   }
 
-  //Still miss something
   public String encryptedMethod(int[] numbers) {
-    String text ="";
+    String text = "";
     char c;
     for (int i = 0; i < numbers.length; i++) {
       c = numberToLetter(numbers[i] - shiftValue());
@@ -183,7 +181,6 @@ public class Main {
     userInterfaceStart();
 
   }
-
 
 
   public static void main(String[] args) {
