@@ -50,6 +50,7 @@ public class Main {
     String text = in.nextLine();
     text = text.toUpperCase();
     System.out.print("You entered: " + text);
+
     return text;
   }
 
@@ -72,10 +73,7 @@ public class Main {
 
   void caesarEncryptMenu() {
     System.out.println("Caesar Encrypting");
-    String inputEncryptTextCaesar = enterText();
-    int shiftValueCaesar = shiftValue();
-    //TODO encrypting method
-    System.out.println("Code text is: " + inputEncryptTextCaesar );
+    caesarEncrypt();
     System.out.println();
     whatNowMenu1();
   }
@@ -89,7 +87,7 @@ public class Main {
     String inputDecryptTextCaesar = enterDecryptText();
     int shiftValueCaesar = shiftValue();
     //TODO decrypting method
-    System.out.println("Code text is: " + inputDecryptTextCaesar );
+    System.out.println("Encrypted text is: " + inputDecryptTextCaesar);
     System.out.println();
     whatNowMenu2();
 
@@ -130,11 +128,52 @@ public class Main {
     }
   }
 
+  void caesarEncrypt() {
+    String text = enterText();
+    int[] encryptedNumbers = encryptMethod(text);
+    String decryptedText = decryptedMethod(encryptedNumbers);
+    int shiftValueCaesar = shiftValue();
+    System.out.println("Decrypted text: " + decryptedText);
+  }
+
+  public int[] encryptMethod(String text) {
+    int[] numbers = new int[text.length()];
+    for (int i = 0; i < text.length(); i++) {
+      char charAtIndex = text.charAt(i);
+      int indexOfChar = letterToNumber(charAtIndex);
+      numbers[i] = indexOfChar;
+    }
+    return numbers;
+  }
+
+  public String decryptedMethod(int[] numbers) {
+    String text ="";
+    char c;
+    for (int i = 0; i < numbers.length; i++) {
+      c = numberToLetter(numbers[i]);
+      text += c;
+    }
+    return text;
+  }
+
+  public char numberToLetter(int number) {
+    String alphabet = " ABCDEFGHIJKLMNOPQRSTVWXYZÆØÅ";
+    char letter = alphabet.charAt(number);
+    return letter;
+  }
+
+  public int letterToNumber(char letter) {
+    String alphabet = " ABCDEFGHIJKLMNOPQRSTVWXYZÆØÅ";
+    int number = alphabet.indexOf(letter);
+    return number;
+  }
+
 
   void go() {
     userInterfaceStart();
 
   }
+
 
 
   public static void main(String[] args) {
